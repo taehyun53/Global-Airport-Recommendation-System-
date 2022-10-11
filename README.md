@@ -42,15 +42,26 @@ It is reasonable to drop these columns because it wouldn't help the training for
 
 • Tukeyhsd - Tukey's HSD is a test I used to make sure how each groups are statistically different from each other.
 
+# 5. Preprocessing
+• Train_test_val/Scaling/Encoding/Resampling/Weighting Techniques Used
+• Split data -> dependent & independent values.
+• Train(0.8), test(0.1), validation split data (0.1)
+• Encode categorical features - binary encoder
+• Scaling - Standard Scaler
+  - Makes it normally distributed
+  - Mean = 0
+  - Stdev = 1
 
-# 5. Algorithms & Machine Learning
+
+# 6. Algorithms & Machine Learning
+• I chose boosting classifiers because my dataset has not many features and its robustness. 
 1. Light BGM Classifier
 2. Ada Boost Classifier
 3. Cat Boost Classifier
 
 
-# 6. Winner & Evaluation
-• 
+# 7. Winner & Evaluation
+• Overview: Although the Light BGM
 
 
 # 7. Future Improvements  
