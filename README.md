@@ -84,11 +84,8 @@ It is reasonable to drop these columns because it wouldn't help the training for
 
 Note: Log loss increases as the predicted probability diverges from the actual label. The goal of our machine learning models is to minimize Log loss value. A perfect model would have a log loss of 0 which means if the log loss is lower, the better. 
 
-• Log loss Equation for binary classification
-  - ![alt text](images/Log_loss_binaryclass_equation.jpeg)
-
-• Log loss Equation for multiclass 
-  - ![alt text](images/Log_loss_multiclass_equation.jpeg)
+• Log loss Equation for binary classification & multiclass
+  - https://www.analyticsvidhya.com/blog/2021/03/binary-cross-entropy-log-loss-for-binary-classification/
 
 # 7. Winner & Evaluation
 • Hypothesis: Cat boost is going to have the best log loss score with the fastest training time. 
