@@ -32,32 +32,38 @@ It is reasonable to drop these columns because it wouldn't help the training for
 
 • Outliers - There were too many outliers but most of them are within the 95% confidence interval. The one's which are outisde of the interval are 2 data points. One in medium_airport and one in heliport. I took a look on them using external resources and those two values are facts so let's keep it.
 
+
 • Column merging - The counts for each airports have big gaps. The quantity of small airports has at least 3 times more than heliport, medim_airport, seaplane_base, large_airport, balloonport. I decided to group them up based on their mean elevation_ft. Therefore, I came up with the group seaplane_base as large_airport + seaplane_base and medium_airport as balloonport + medium_airport.
 
 • False Informations - I identified that a lot of values in the states columns weren't states. Some were actually continents and some were country names. Time is gold and I don't want to get stuck here too much which made me drop some values that weren't adequate.
 
 
 # 4. EDA
-• ECDF plot - Can visually see what 
+• ECDF plot - Can visually see overall quantitative percentage respect to their corresponding range of elevation_ft.
+![alt text](images/ECDF.jpeg)
 
 • One way Anova - Used this test to find out if there is a difference in mean between the groups of airports. I was thinking to use two independent values which would lead me to test using two-way ANOVA but it wouldn't be necessary because for now the key feature would be elevation_ft.
+![alt text](images/one_way_ANOVA.jpeg)
 
-• Tukeyhsd - Tukey's HSD is a test I used to make sure how each groups are statistically different from each other.
-![alt text](images/Tukeyhsd.csv)
+• Tukeyhsd - Tukey's HSD is a test I used to make sure how mean for each groups are statistically different from each other.
+![alt text](images/Tukeyhsd.jpeg)
 
 • Correlation - Yes, correlation. So drop Longitude or Latitude!
 
-![alt text](images/mean_barplot.jpeg)
+![alt text](images/Correlation.jpeg)
+
 # 5. Preprocessing
 • Train_test_val/Scaling/Encoding/Resampling/Weighting Techniques Used
 • Split data -> dependent & independent values.
 • Train(0.8), test(0.1), validation split data (0.1)
 • Encode categorical features - binary encoder
+  - Why binary encoder? 
+    - Converts ths categorical features to ordinal numbers and then changes these to binary then different columns which is really advantageous when there are a lot of features.
+    - Binary encoder is a memory-efficient encoding scheme as it uses fewer features than one-hot encoding. It's relaly good when there's a lot of features       because it reduces the rucse of dimensionality for data with high cardinality. 
 • Scaling - Standard Scaler
   - Makes it normally distributed
   - Mean = 0
   - Stdev = 1
-
 
 # 6. Algorithms & Machine Learning
 • I chose boosting classifiers because my dataset has not many features and its robustness. Boosting models have the tendency to overfit meaning high score on the training set but very low score when we are generalizing the new data set. 
@@ -70,9 +76,26 @@ Note: Log loss increases as the predicted probability diverges from the actual l
 
 # 7. Winner & Evaluation
 • Hypothesis: Cat boost is going to have the best log loss score with the fastest training time. 
+
+![alt text](images/Log_Loss_Scores.jpeg)
+
 • Overview: The light BGM was the fastest and most accurate model with the log loss score of 0.681140.
-• Therefore, I determined both the training and testing scores for the models.
+• I determined both the training and testing scores for the models.
 • Hypertuning Parameters: Found the optimal reg_alpha, reg_lambda, max_depth, num_leaves, colsample_bytree, maxbin, etc to account for overfitting.
+• Classification Report
+![alt text](images/classification_report.jpeg)
+
+• Training_score, Accuracy, Precision, Recall, F1_score, logloss, 
+![alt text](images/LGBM_Metrics.jpeg)
+
+• ROC_AUC_Curve - The mBest ROC score is small_airport which makes sense because it had the most samples.
+![alt text](images/ROC_curves_LGBM.jpeg)
+
+• ROC_AUC score for micro and macro. 
+![alt text](images/ROC_AUC_MICCRO_MACRO.jpeg)
+  - Why do micro and macro have different results?
+    - First of all, macro-average will compute the metric independently for each class and then take the average (hence treating all classes equally),         - Second, micro-average will aggregate the contributions of all classes to compute the average metric. 
+    - Therefore, in a multi-class classification setup, micro-average is preferable if you suspect there might be class imbalance   
 
 
 # 8. Future Improvements  
@@ -81,6 +104,7 @@ Note: Log loss increases as the predicted probability diverges from the actual l
 • Out of 12 features, we used only 4 features.
 • Train Set - 80%, Test Set - 10%, Validation Set - 10%
 • With more usefull features, the model can be improved in the future.
+
 
 
 
