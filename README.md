@@ -54,23 +54,28 @@ It is reasonable to drop these columns because it wouldn't help the training for
 
 
 # 6. Algorithms & Machine Learning
-• I chose boosting classifiers because my dataset has not many features and its robustness. 
+• I chose boosting classifiers because my dataset has not many features and its robustness. Boosting models have the tendency to overfit meaning high score on the training set but very low score when we are generalizing the new data set. 
+
 1. Light BGM Classifier
 2. Ada Boost Classifier
 3. Cat Boost Classifier
 
+Note: Log loss increases as the predicted probability diverges from the actual label. The goal of our machine learning modlles is to minimize Log loss value. A perfect model would have a log loss of 0 which means if the log loss is lower, the better. 
 
 # 7. Winner & Evaluation
-• Overview: Although the Light BGM
+• Hypothesis: Cat boost is going to have the best log loss score with the fastest training time. 
+• Overview: The light BGM was the fastest and most accurate model with the log loss score of 0.681140.
+• Therefore, I determined both the training and testing scores for the models.
+• Hypertuning Parameters: Found the optimal reg_alpha, reg_lambda, max_depth, num_leaves, colsample_bytree, maxbin, etc to account for overfitting.
 
 
 # 7. Future Improvements  
-• All sources of datasets contributed to the predictive power of the model
-• Out of 3 supervised classification models, the LGBM  provided the best results.
-• Out of 67 features, we used only 31 features for the best model with 12 from the flight data, 16 from the weather data and 3 from the flight historical     performances data (which we engineered).
+• All sources of datasets contributed to the predictive power of the model.
+• Out of 3 supervised classification models, LGBM  provided the best results.
+• Out of 12 features, we used only 4 features.
 • Train Set - 80%, Test Set - 10%, Validation Set - 10%
-• With more features, the model can be improved in the future.
-• Log loss would be a good lose metric to use because it’s robust to imbalance datasets.
+• With more usefull features, the model can be improved in the future.
+
 
 
 
