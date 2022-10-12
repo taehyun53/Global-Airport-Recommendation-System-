@@ -109,7 +109,7 @@ Note: Log loss increases as the predicted probability diverges from the actual l
 
 • ROC_AUC score for micro and macro. 
 
-![alt text](images/ROC_AUC_MICCRO_MACRO.jpeg)
+![alt text](images/ROC_AUC_MIRCO_MACRO.jpeg)
 
   - Why do micro and macro have different results?
     - First of all, macro-average will compute the metric independently for each class and then take the average (hence treating all classes equally). 
