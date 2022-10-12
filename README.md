@@ -12,12 +12,11 @@ Datahub is a center of data exchange that is supported by data science. It's an 
 
 • https://datahubproject.io/
 
-# 2. Method
 
+# 2. Method
 Utilizing this datasheet, it was possible to make a decision of choosing the key feature which is altitude(elevation(ft)). The column 'altitude_ft' was very important and helpful for me to understand the relationhsip between flights and density altitude. Due to the abundant external resources, it was possible for me to easily understand how to handle this dataset. 
 
 # 3. Data Wrangling
-
 • NaNs & Duplicated Rows - I plotted the MSNO matrix to see if the values are missing completely at random or not missing at random or just missing at random. The columns that contained null values were elevation_ft, continent, municipality, gps_code, local_code, and the missing values were definitely not missing with certain patterns. There were no Duplicated Rows. 
 
 ![alt text](images/MSNO_matrix.jpeg)
@@ -30,12 +29,15 @@ Utilizing this datasheet, it was possible to make a decision of choosing the key
 5. Local_code
 It is reasonable to drop these columns because it wouldn't help the training for the model since every single value is unique.
 
-• Outliers - There were too many outliers but most of them are within the 95% confidence interval. The one's which are outisde of the interval are 2 data points. One in medium_airport and one in heliport. I took a look on them using external resources and those two values are facts so let's keep it.
+• Outliers - There were too many outliers but most of them are within the 95% confidence interval. The one's which are outisde of the interval are 2 data points. One in medium_airport and one in heliport. I took a look on them using external resources and those two values are facts so I kept it.
 
+![alt text](images/Box_plot_elevation_ft_airports.jpeg)
 
 • Column merging - The counts for each airports have big gaps. The quantity of small airports has at least 3 times more than heliport, medim_airport, seaplane_base, large_airport, balloonport. I decided to group them up based on their mean elevation_ft. Therefore, I came up with the group seaplane_base as large_airport + seaplane_base and medium_airport as balloonport + medium_airport.
 
-• False Informations - I identified that a lot of values in the states columns weren't states. Some were actually continents and some were country names. Time is gold and I don't want to get stuck here too much which made me drop some values that weren't adequate.
+![alt text](images/elevation_ft_type_airports_after_merge.jpeg)
+
+• False Informations - I identified that a lot of values in the states columns weren't states. Some were actually continents and some were country names. Time is gold and I don't want to get stuck here too much so I dropped some values that weren't adequate.
 
 
 # 4. EDA
@@ -59,7 +61,8 @@ It is reasonable to drop these columns because it wouldn't help the training for
 • Encode categorical features - binary encoder
   - Why binary encoder? 
     - Converts ths categorical features to ordinal numbers and then changes these to binary then different columns which is really advantageous when there are a lot of features.
-    - Binary encoder is a memory-efficient encoding scheme as it uses fewer features than one-hot encoding. It's relaly good when there's a lot of features       because it reduces the rucse of dimensionality for data with high cardinality. 
+    - Binary encoder is a memory-efficient encoding scheme as it uses fewer features than one-hot encoding. It's really good when there's a lot of features because it reduces the curse of dimensionality for data with high cardinality. 
+    
 • Scaling - Standard Scaler
   - Makes it normally distributed
   - Mean = 0
@@ -68,11 +71,18 @@ It is reasonable to drop these columns because it wouldn't help the training for
 # 6. Algorithms & Machine Learning
 • I chose boosting classifiers because my dataset has not many features and its robustness. Boosting models have the tendency to overfit meaning high score on the training set but very low score when we are generalizing the new data set. 
 
-1. Light BGM Classifier
-2. Ada Boost Classifier
-3. Cat Boost Classifier
+• Models used
+  1. Light BGM Classifier
+  2. Ada Boost Classifier
+  3. Cat Boost Classifier
 
 Note: Log loss increases as the predicted probability diverges from the actual label. The goal of our machine learning modlles is to minimize Log loss value. A perfect model would have a log loss of 0 which means if the log loss is lower, the better. 
+
+• Log loss Equation for binary classification
+  - ![alt text](images/Log_loss_binaryclass_equation.jpeg)
+
+• Log loss Equation for multiclass 
+  - ![alt text](images/Log_loss_multiclass_equation.jpeg)
 
 # 7. Winner & Evaluation
 • Hypothesis: Cat boost is going to have the best log loss score with the fastest training time. 
@@ -80,29 +90,44 @@ Note: Log loss increases as the predicted probability diverges from the actual l
 ![alt text](images/Log_Loss_Scores.jpeg)
 
 • Overview: The light BGM was the fastest and most accurate model with the log loss score of 0.681140.
-• I determined both the training and testing scores for the models.
+
+• I determined that both the training and testing scores for the models.
+
 • Hypertuning Parameters: Found the optimal reg_alpha, reg_lambda, max_depth, num_leaves, colsample_bytree, maxbin, etc to account for overfitting.
+
 • Classification Report
+
 ![alt text](images/classification_report.jpeg)
 
-• Training_score, Accuracy, Precision, Recall, F1_score, logloss, 
+• Training_score, Accuracy, Precision, Recall, F1_score, logloss
+
 ![alt text](images/LGBM_Metrics.jpeg)
 
 • ROC_AUC_Curve - The mBest ROC score is small_airport which makes sense because it had the most samples.
+
 ![alt text](images/ROC_curves_LGBM.jpeg)
 
 • ROC_AUC score for micro and macro. 
+
 ![alt text](images/ROC_AUC_MICCRO_MACRO.jpeg)
+
   - Why do micro and macro have different results?
-    - First of all, macro-average will compute the metric independently for each class and then take the average (hence treating all classes equally),         - Second, micro-average will aggregate the contributions of all classes to compute the average metric. 
-    - Therefore, in a multi-class classification setup, micro-average is preferable if you suspect there might be class imbalance   
+    - First of all, macro-average will compute the metric independently for each class and then take the average (hence treating all classes equally). 
+           
+    - Second, micro-average will aggregate the contributions of all classes to compute the average metric. 
+           
+    - Therefore, in a multi-class classification setup, micro-average is preferable if you suspect there might be class imbalance.
 
 
 # 8. Future Improvements  
 • All sources of datasets contributed to the predictive power of the model.
+
 • Out of 3 supervised classification models, LGBM  provided the best results.
+
 • Out of 12 features, we used only 4 features.
+
 • Train Set - 80%, Test Set - 10%, Validation Set - 10%
+
 • With more usefull features, the model can be improved in the future.
 
 
