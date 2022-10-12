@@ -43,7 +43,11 @@ It is reasonable to drop these columns because it wouldn't help the training for
 • One way Anova - Used this test to find out if there is a difference in mean between the groups of airports. I was thinking to use two independent values which would lead me to test using two-way ANOVA but it wouldn't be necessary because for now the key feature would be elevation_ft.
 
 • Tukeyhsd - Tukey's HSD is a test I used to make sure how each groups are statistically different from each other.
+![alt text](images/Tukeyhsd.csv)
 
+• Correlation - Yes, correlation. So drop Longitude or Latitude!
+
+![alt text](images/mean_barplot.jpeg)
 # 5. Preprocessing
 • Train_test_val/Scaling/Encoding/Resampling/Weighting Techniques Used
 • Split data -> dependent & independent values.
