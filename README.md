@@ -120,15 +120,14 @@ Note: Log loss increases as the predicted probability diverges from the actual l
 
 
 # 8. Future Improvements  
-• All sources of datasets contributed to the predictive power of the model.
+• Try to use more simple models and compare the results with the complex models.
 
-• Out of 3 supervised classification models, LGBM  provided the best results.
+• Out of 3 supervised classification models, LGBM provided the best results but had the most options for hyperparameter tuning so it might have been a biased result..
 
-• Out of 12 features, we used only 4 features.
+• Out of 12 features, we used only 4 features so let's try to add some more features.
 
-• Train Set - 80%, Test Set - 10%, Validation Set - 10%
+• Add more parameters and try out more varieties such as the area, width, and height of each type of planes. 
 
-• With more usefull features, the model can be improved in the future.
 
 
 
