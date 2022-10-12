@@ -20,7 +20,7 @@ Utilizing this datasheet, it was possible to make a decision of choosing the key
 
 • NaNs & Duplicated Rows - I plotted the MSNO matrix to see if the values are missing completely at random or not missing at random or just missing at random. The columns that contained null values were elevation_ft, continent, municipality, gps_code, local_code, and the missing values were definitely not missing with certain patterns. There were no Duplicated Rows. 
 
-
+![alt text](images/MSNO_matrix.jpeg)
 
 • Dropping Columns(Curse of Dimensionality) - The following 6 columns that were contained as primary key values. 
 1. Name
