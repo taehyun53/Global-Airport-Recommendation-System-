@@ -20,6 +20,8 @@ Utilizing this datasheet, it was possible to make a decision of choosing the key
 
 • NaNs & Duplicated Rows - I plotted the MSNO matrix to see if the values are missing completely at random or not missing at random or just missing at random. The columns that contained null values were elevation_ft, continent, municipality, gps_code, local_code, and the missing values were definitely not missing with certain patterns. There were no Duplicated Rows. 
 
+
+
 • Dropping Columns(Curse of Dimensionality) - The following 6 columns that were contained as primary key values. 
 1. Name
 2. Municipality
@@ -69,7 +71,7 @@ Note: Log loss increases as the predicted probability diverges from the actual l
 • Hypertuning Parameters: Found the optimal reg_alpha, reg_lambda, max_depth, num_leaves, colsample_bytree, maxbin, etc to account for overfitting.
 
 
-# 7. Future Improvements  
+# 8. Future Improvements  
 • All sources of datasets contributed to the predictive power of the model.
 • Out of 3 supervised classification models, LGBM  provided the best results.
 • Out of 12 features, we used only 4 features.
